@@ -1,0 +1,81 @@
+Project: Occurrence of Max Value 
+
+
+Problem Description:
+Write a program that reads integers, finds the largest of them, and counts its occurrences. Assume that the input ends with number 0. Suppose that you entered 3 5 2 5 5 5 0; the program finds that the largest is 5 and the occurrence count for 5 is 4. (Hint: Maintain two variables, max and count. max stores the current max number, and count stores its occurrences. Initially, assign the first number to max and 1 to count. Compare each subsequent number with max. If the number is greater than max, assign it to max and reset count to 1. If the number is equal to max, increment count by 1.)
+
+Here are sample runs of the program:
+
+Sample 1:
+Enter numbers: 3 5 2 5 5 5 0
+The largest number is 5 The occurrence count of the largest number is 4
+
+Sample 2:
+Enter numbers: 3 6 5 4 2 4 5 4 5 5 0
+The largest number is 6 The occurrence count of the largest number is 1
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+The goal of this program is to read user entered numbers and find the largest number among the list. Also, we have to calculate the count of the occurrences of the largest number. For instance, if the user enters 2 3 3 4 9 5 0 then the output should display 9 as the largest number and its occurrence; in this case, it appears 1 time.
+The program asks user to enter an input string and store it into integer variable number. At first it assigns the largest number from the string to max and initializes the count variable to 1.
+For solving the program, I created two separate variables max and count. The variable max will store the current max number and count stores its occurrences. For implementing the logic, I used do-while loop.
+The output should display the largest number and its occurrence.
+
+
+Design:
+(Describe the major steps for solving the problem.)
+
+1.	In main method create a scanner object for accepting user enter input numbers
+2.	Initialized number and max variable as integer (int number, max)
+3.	Initialized the counter variable to 1 (int count = 1)
+4.	Prompt the user to enter numbers
+5.	Store numbers into number variable
+6.	Assign the first number to max
+7.	In do-loop assign numbers to number variable
+8.	Check whether the number is greater than max and if so then store the largest number into max
+9.	Reset the count variable
+10.	Check whether number is equals to max and if so then increment the count by 1
+11.	Check whether the last number is 0 and if its 0 then continue with the first statement after the while-loop
+12.	Display the results
+
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+Name your program Exercise05_41
+
+import java.util.Scanner;
+public class Exercise05_41 {
+
+	public static void main(String[] args) {
+		// Create a scanner
+		Scanner input = new Scanner(System.in);
+	
+		int number, max;
+		int count = 1;
+		// Prompt the user to enter a number
+		System.out.print("Enter numbers: ");
+		number = input.nextInt();
+		// Assign the first number to max
+		max = number;
+	
+		do {
+			number = input.nextInt();
+			if(number > max)
+			{
+				max = number;
+				count = 0;
+			}
+			if(number == max)
+			{
+				count++;
+			}
+		}while(number != 0);   // Assume that the input ends with number 0
+		
+	
+	// Display the results
+		System.out.println("The largest number is " + max);
+		System.out.println("The occurance count of the largest number is " + count);
+
+	}
+
+}
