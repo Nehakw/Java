@@ -1,0 +1,72 @@
+Project 3: Geometry: point in a rectangle? 
+
+Problem Description:
+
+Write a program that prompts the user to enter a point (x, y) and checks whether the point is within the rectangle centered at (0, 0) with width 10 and height 5. For example, (2, 2) is inside the rectangle and (6, 4) is outside the rectangle, as shown in the Figure. 
+
+(Hint: A point is in the rectangle if its horizontal distance to (0, 0) is less than or equal to 10 / 2 and its vertical distance to (0, 0) is less than or equal to 5 / 2.) 
+
+Here are sample runs of the program:
+
+Sample 1:
+Enter a point with two coordinates: 2 2
+Point (2.0, 2.0) is in the rectangle
+
+Sample 2:
+Enter a point with two coordinates: 6 4
+Point (6.0, 4.0) is not in the rectangle
+
+
+Analysis: 
+(Describe the problem including input and output in your own words.)
+
+The program can work as follow:
+
+1.	Prompt the user to enter a point (x,y)
+2.	Check whether the point is within the rectangle
+3.	Display the result
+
+
+Design:
+(Describe the major steps for solving the problem.)
+
+Here, by considering (0,0) as center I took 10 as width and 5 as height.
+The I applied the formula to find whether the points are in the rectangle or not.
+In this formula, I performed OR operation of  x20.5 and checked whether it is less than or equals to 10/2 and y20.5 and checked whether it is less than or equals to 5.0/2
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+Name the program Exercise03_23
+
+import java.util.Scanner;
+public class Exercise03_23 {
+
+	public static void main(String[] args) {
+		// Create a Scanner
+		Scanner input = new Scanner(System.in);
+		
+		// Prompt the user to enter a point(x,y)
+		System.out.print("Enter a point with two coordinates: ");
+		double x = input.nextDouble();
+		double y = input.nextDouble();
+		
+		// Check whether the point is within the rectangle
+		// centered at (0,0) with width 10 and height 5
+		boolean withinRectangle = (Math.pow(Math.pow(x,2), 0.5) <= 10 / 2) || (Math.pow(Math.pow(y, 2), 0.5) <= 5.0 /2);
+		
+		// Display results
+		System.out.println("Point (" + x + ", " + y + ") is " + ((withinRectangle) ? "in " : "not in ") + "the rectangle");
+	}
+}
+
+
+Testing: (Describe how you test this program)
+
+Line No	x	y	output
+10	2		
+11		2	
+18			Point (2.0,2.0) is in the rectangle
+
+Line No	x	y	output
+10	6		
+11		4	
+18			Point (6.0,4.0) is not in the rectangle
