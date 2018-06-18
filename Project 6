@@ -1,0 +1,155 @@
+Project: Validating Credit Cards
+
+
+Problem Description:
+Credit card numbers follow certain patterns. A credit card number must have between 13 and 16 digits. It must start with:
+4 for Visa cards
+5 for Master cards
+37 for American Express cards
+6 for Discover cards
+
+In 1954, Hans Luhn of IBM proposed an algorithm for validating credit card numbers. The algorithm is useful to determine if a card number is entered correctly or if a credit card is scanned correctly by a scanner. Almost all credit card numbers are generated following this validity check, commonly known as the Luhn check or the Mod 10 check, which can be described as follows (for illustration, consider the card number 4388576018402626):
+
+1. Double every second digit from right to left. If doubling of a digit results in a two-digit number, add up the two digits to get a single-digit number.
+2 * 2 = 4
+2 * 2 = 4
+4 * 2 = 8
+1 * 2 = 2
+6 * 2 = 12 (1 + 2 = 3)
+5 * 2 = 10 (1 + 0 = 1)
+8 * 2 = 16 (1 + 6 = 7)
+4 * 2 = 8
+
+2. Now add all single-digit numbers from Step 1. 
+4 + 4 + 8 + 2 + 3 + 1 + 7 + 8 = 37
+
+3. Add all digits in the odd places from right to left in the card number.
+   6 + 6 + 0 + 8 + 0 + 7 + 8 + 3 = 38
+
+4. Sum the results from Step 2 and Step 3.
+37 + 38 = 75
+
+5. If the result from Step 4 is divisible by 10, the card number is valid; otherwise, it is invalid. For example, the number 4388576018402626 is invalid, but the number 4388576018410707 is valid.
+
+Write a program that prompts the user to enter a credit card number as a long integer. Display whether the number is valid or invalid. 
+
+Here are sample runs of the program:
+
+Sample 1:
+Enter a credit card number as a long integer: 4246345689049834
+4246345689049834 is invalid
+
+Sample 2:
+Enter a credit card number as a long integer: 4388576018410707
+4388576018410707 is valid
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+The goal of this program is to read the user entered credit card number and find out whether the enter number is valid or invalid.
+There are few specifications mentioned for checking whether an entered number is valid and they are as follows:
+1.	The number must be between 13 and 16 digits long i.e. it should be at least greater than or equal to 13 digits but must be less than or equal to 16 digits
+2.	It should start with 4 for Visa card
+3.	5 for Master card
+4.	37 for American express card
+5.	6 for Discover card
+6.	Now we have to double every second digit from right to left and if this doubling result into two-digit number then we have to add them to get the single digit number
+7.	Now we have to add all single digit numbers from the 6th step
+8.	Add all the digits in the odd places from right to left from the card number
+9.	Again, we have to add all the digits from step 7 and 8
+10.	If the result from the step 9 is divisible by 10 then it is valid number otherwise it is invalid
+
+
+Design:
+(Describe the major steps for solving the problem using the diagram like the one in the book Figure 6.12)
+
+1.	In main method create a scanner object for accepting user enter input numbers
+2.	Create a Boolean isValid method for checking validity of number
+3.	Create an integer method named sumOfDoubleEvenPlace while will perform addition of numbers at even places
+4.	Create an integer method named getDigit which will return the number if it is a single digit number, otherwise, returns the sum of two digit
+5.	Create an integer method named sumOfOddPlaces which will return the sum of odd place digits in number
+6.	Create a Boolean method named prefixMatched while will return true if the specified digit is prefix for the number
+7.	Create an integer method named getSize which will return the number of digits in the specified digit
+8.	Create a long method named getPrefix which will return the first k numbers of the digits from number and if the number of digits is less than k, then returns the number
+
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+
+import java.util.Scanner;
+public class Exercise06_31 {
+
+	public static void main(String[] args) {
+		// Create a scanner
+		Scanner input = new Scanner(System.in);
+		
+		// Prompt the user to enter a credit card number as a long integer
+		System.out.print("Enter a credit card number(as a long integer): ");
+		long number = input.nextLong();
+		
+		System.out.println(number + " is " + (isValid(number) ? "valid" : "invalid"));
+
+	}
+	
+	// Return true if the card number is valid
+	public static boolean isValid(long number)
+	{
+		boolean valid = (getSize(number) >= 13 && getSize(number) <= 16 &&
+				        (prefixMatched(number, 4) || prefixMatched(number, 5) ||
+				         prefixMatched(number, 37) || prefixMatched(number, 6)) &&
+				        (sumOfDoubleEvenPlace(number) + sumOfOddPlace(number)) % 10 == 0);
+		
+		return valid;
+	}
+	
+	public static int sumOfDoubleEvenPlace(long number)
+	{
+		int sum = 0;
+		String num  = number + "";
+		for(int i = getSize(number) - 2; i >= 0; i -= 2 )
+		{
+			sum += getDigit(Integer.parseInt(num.charAt(i) + "") * 2);
+		}
+		return sum;
+	}
+	
+	public static int getDigit(int number)
+	{
+		if(number < 9)
+			return number;
+		else
+			return number / 10 + number % 10;
+	}
+	
+	public static int sumOfOddPlace(long number)
+	{
+		int sum = 0;
+		String num = number + "";
+		for(int i = getSize(number) - 1; i >= 0; i -= 2)
+		{
+			sum += Integer.parseInt(num.charAt(i) + "");
+		}
+		return sum;
+	}
+	
+	public static boolean prefixMatched(long number, int d)
+	{
+		return getPrefix(number, getSize(d)) == d;
+	}
+	
+	public static int getSize(long d)
+	{
+		String num = d + "";
+		return num.length();
+	}
+	
+	public static long getPrefix(long number, int k)
+	{
+		if(getSize(number) > k)
+		{
+			String num = number + "";
+			return Long.parseLong(num.substring(0, k));
+		}
+		return number;
+	}
+
+}
