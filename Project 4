@@ -1,0 +1,124 @@
+Project: Phone keypads 
+
+
+Problem Description:
+The international standard letter/number mapping found on the telephone is shown below:
+
+1 	2 
+ABC	3 
+DEF
+4 
+GHI	5 
+JKL	6 
+MNO
+7 
+PQRS	8 
+TUV	9 
+WXYZ
+	0 	
+
+
+Write a program that reads a letter and displays its corresponding digit.
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+The goal of this program is to find out the corresponding digit by asking user to enter input letter and read an input then return the corresponding number of the entered letter according to the phone keypad. For this here I used switch case and, in each case, there are three letters as shown below:
+
+2	3	4	5	6	7	8	9
+ABC	DEF	GHI	JKL	MNO	PQRS	TUV	WXYZ
+case 1        case 2       case 3       case 4      case 5        case 6     case 7      case 8  
+
+The resulting digit is decided upon the letter selection. For example, if the letter selected is F the corresponding digit will be 3. As mentioned below in the code section, the program prompts the user to answer whether the digit is in Set 1 i.e. here I implemented the set logic using switch case 1 for set 1, case 2 for set 2 and so on. If the digit is in the selected switch case then program displays that digit.
+The result should display the correct number that corresponds to the entered letters that are displayed on the phone keypad. Also, if user enters any value other than mentioned digit such as any special character #, % or $ then we have to prompt the user that the entered value is invalid.
+
+Design:
+(Describe the major steps for solving the problem.)
+
+1.	In main method create a scanner object for accepting user entered letter
+2.	Prompt a user to enter a string
+3.	Checked whether the entered letter is uppercase 
+4.	Create an integer digit for storing corresponding digit
+5.	Create a switch case which will accept user entered letter as parameter
+            In switch case each letter represents a separate case for example, 
+             case 'A':
+             case 'B':
+             case 'C':
+the above switch case represents one entire case and whenever user enters any letter from A, B or C it will assign value 2 to the digit parameter. In this way use the same logic for all the letter on the phone keypad
+6.	Display the result
+7.	If user enters any invalid character then displays that input is invalid
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+
+import java.util.Scanner;
+public class Exercise04_15 {
+	
+	public static void main(String[] args) {
+		// Create a scanner
+		Scanner input = new Scanner(System.in);
+		// Prompt the user to enter a letter
+		System.out.print("Enter a letter:");
+		String letter = input.next();
+		input.close();
+		char ch = letter.toUpperCase().charAt(0);
+		int digit;
+		switch(ch)
+		{
+		case '1':
+			digit = 1;
+			break;
+		case 'A':
+		case 'B':
+		case 'C':
+			digit = 2;
+			break;
+		case 'D':
+		case 'E':
+		case 'F':
+			digit = 3;
+			break;
+		case 'G':
+		case 'H':
+		case 'I':
+			digit = 4;
+			break;
+		case 'J':
+		case 'K':
+		case 'L':
+			digit = 5;
+			break;
+		case 'M':
+		case 'N':
+		case 'O':
+			digit = 6;
+			break;
+		case 'P':
+		case 'Q':
+		case 'R':
+		case 'S':
+			digit = 7;
+			break;
+		case 'T':
+		case 'U':
+		case 'V':
+			digit = 8;
+			break;
+		case 'W':
+		case 'X':
+		case 'Y':
+		case 'Z':
+			digit = 9;
+			break;
+			default:
+				digit = 0;
+				break;
+		}
+		if(digit != 0)
+		{
+			System.out.print("The corresponding digit is: " + digit);
+			System.exit(0);
+		}
+		System.out.print(letter + " is an invalid input");
+	}
+}
+
