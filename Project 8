@@ -1,0 +1,95 @@
+Project: Locate the largest element
+
+Problem Description:
+Write the following method that returns the location of the largest element in a two-dimensional array.
+
+public static int[] locateLargest(double[][] a) 
+
+The return value is a one-dimensional array that contains two elements. These two elements indicate the row and column indices of the largest element in the two-dimensional array. Write a test program that prompts the user to enter a two-dimensional array and displays the location of the largest element in the array. Here is a sample run:
+
+<Output>
+Enter the number of rows and columns of the array: 3 4
+Enter the array: 
+23.5 35 2 10
+4.5 3 45 3.5
+35 44 5.5 9.6
+The location of the largest element is at (1, 2)
+<End Output>
+
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+The goal of this program is to return the largest element in a two-dimensional array. The program should ask the user to enter the number of rows and columns in an array. After entering the number of rows and columns, it should ask the user to enter array elements. Once the user has entered the array elements, the program should find the largest element from the array and return the co-ordinates of the rows and columns of the two-dimensional array. The output must be a one-dimensional array with two elements which indicates the row and column indices.
+
+Design:
+(Describe the major steps for solving the problem.)
+
+1.	In main method create a scanner object for accepting user enter number of rows and columns
+2.	Create an integer variable for storing rows and column values
+3.	Create a two-dimensional array for storing elements in row and columns
+4.	Prompt the user to enter array elements
+5.	Create a for loop for initializing the user entered values of rows elements
+6.	Create a for loop for initializing the user entered values of column elements
+7.	Store the initialized values into two-dimensional array
+8.	Call a method for finding the location of largest element in an array
+9.	Store the largest element into integer variable named location
+10.	Print the location of the largest element
+11.	Create a method named locateLargest for finding the largest element from the entered array
+12.	Create an integer variable named location for storing the location of largest element and initialized it to {0, 0}
+13.	Create a for loop to read all the elements in the row
+14.	Create a for loop to read all the elements in the column
+15.	Compare row and column with the largest element 
+16.	Assign the index of largest element of row
+17.	Assign the index of largest element of column
+18.	Store the largest element into largest variable
+19.	Return the location of the largest element
+
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+
+import java.util.Scanner;
+public class Exercise08_13 {
+
+	public static void main(String[] args) {
+		// Create a scanner object
+		Scanner input = new Scanner(System.in);
+		
+		// Prompt the user to enter number of rows and columns in the array
+		System.out.print("Enter the number of rows and columns of the array:");
+		int row = input.nextInt();
+		int column = input.nextInt();
+		double[][] a = new double[row][column];
+		
+		// Prompt the user to enter the array element
+		System.out.println("Enter the array:");
+		for(int i = 0; i < row; i++)
+			for(int j = 0 ; j < column; j++)
+				a[i][j] = input.nextDouble();
+		int[] location =  locateLargest(a);
+		System.out.printf("The location of the largest element is at (%d, %d)\n", location[0], location[1]);
+
+	}
+	
+	public static int[] locateLargest(double[][] a)
+	{
+		int[] location = new int[] {0, 0};
+		double largest = a[0][0];
+		for(int i = 0; i < a.length; i++)
+		{
+			for(int j = 0; j < a[i].length; j++)
+			{
+				if(a[i][j] > largest)
+				{
+					// Assign the index of largest element of row
+					location[0] = i;
+					// Assign the index of largest element of column
+					location[1] = j;
+					largest = a[i][j];
+				}
+			}
+		}
+		return location;
+	}
+
+}
