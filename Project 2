@@ -1,0 +1,216 @@
+Project 2: Computing Tax 
+
+Problem Description:
+
+The United States federal personal income tax is calculated based on filing status and taxable income. There are four filing statuses: single filers, married filing jointly, married filing separately, and head of household. The tax rates vary every year. Table 3.2 shows the rates for 2009. If you are, say, single with a taxable income of $10,000, the first $8,350 is taxed at 10% and the other $1,650 is taxed at 15%. So, your tax is $1,082.5.
+
+Table 1
+2009 U.S. Federal Personal Tax Rates
+Marginal Tax Rate	Single	Married Filing Jointly or Qualified Widow(er)	Married Filing Separately	Head of Household
+10%	$0 – $8,350	$0 – $16,700	$0 – $8,350	$0 – $11,950
+15%	$8,351– $33,950	$16,701 – $67,900	$8,351 – $33,950	$11,951 – $45,500
+25%	$33,951 – $82,250	$67,901 – $137,050	$33,951 – $68,525	$45,501 – $117,450
+28%	$82,251 – $171,550	$137,051 – $208,850	$68,525 – $104,425	$117,451 – $190,200
+33%	$171,551 – $372,950	$208,851 – $372,950	$104,426 – $186,475	$190,201 - $372,950
+35%	$372,951+	$372,951+	$186,476+	$372,951+
+
+You are to write a program to compute personal income tax. Your program should prompt the user to enter the filing status and taxable income and compute the tax. Enter 0 for single filers, 1 for married filing jointly, 2 for married filing separately, and 3 for head of household. 
+
+Here are sample runs of the program:
+
+Sample 1:
+Enter the filing status: 0
+Enter the taxable income: 100000
+Tax is 21720.0
+
+Sample 2:
+Enter the filing status: 1
+Enter the taxable income: 300339
+Tax is 76932.87
+
+Sample 3:
+Enter the filing status: 2
+Enter the taxable income: 123500
+Tax is 29665.5
+
+Sample 4:
+Enter the filing status: 3
+Enter the taxable income: 4545402
+Tax is 1565250.7
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+The program can work as follow:
+
+1.	Prompt the user for entering the status of tax filing as status
+2.	Prompt the user to enter taxable income as income
+3.	Perform the tax calculation for entered status
+4.	Display the result
+
+
+
+
+Design:
+(Describe the major steps for solving the problem.)
+
+Here, I used switch statement which will prompt the user to enter the tax filing status. Based upon the user enter status I applied the formula as mentioned in table for calculating tax for each status.
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+
+Name your class Exercise03_13
+
+import java.util.Scanner;
+public class Exercise03_13 {
+
+	public static void main(String[] args) {
+		// Create a Scanner
+		Scanner input = new Scanner(System.in);
+		
+		// Prompt the user to enter filing status
+		System.out.print("(0 - single filers, 1 - married jointly or " + "qualifying widow(er), 2 - married separately, 3 - head of " + "household) Enter the filing status: ");
+		
+		int status = input.nextInt();
+		
+		// Prompt the user to enter taxable income
+		System.out.print("Enter the taxable income: ");
+		double income = input.nextDouble();
+		
+		// Compute tax
+		double tax = 0;
+		
+		switch(status)
+		{
+		case 0: // Compute tax for single filers
+			tax += (income <= 8350) ? income * 0.10 : 8350 * 0.10;
+			if(income > 8350)
+			{
+				tax += (income <= 33950) ? (income - 8350) * 0.15 : 25600 * 0.15;
+			}
+			if(income > 33950)
+			{
+				tax += (income <= 82250) ? (income - 33950) * 0.25 : 48300 * 0.25;
+			}
+			if(income > 82250)
+			{
+				tax += (income <= 171550) ? (income - 82250) * 0.28 : 89300 * 0.28;
+			}
+			if(income > 171550)
+			{
+				tax += (income <= 372950) ? (income - 171550) * 0.33 : 201400 * 0.33;
+			}
+			if(income > 372950)
+			{
+				tax += (income - 372950) * 0.35;
+			}
+			break;
+			
+		case 1: // Compute tax for married jointly or qualified widow(er)
+			tax += (income <= 16700) ? income * 0.10 : 16700 * 0.10;
+			if(income > 16700)
+			{
+				tax += (income <= 67900) ? (income - 16700) * 0.15 : (67900 - 16700) * 0.15;
+			}
+			if(income > 67900)
+			{
+				tax += (income <= 137050) ? (income - 67900) * 0.25 : (137050 - 67900) * 0.25;
+			}
+			if(income > 137050)
+			{
+				tax += (income <= 208850) ? (income - 137050) * 0.28 : (208850 - 137050) * 0.28;
+			}
+			if(income > 208850)
+			{
+				tax += (income <= 372950) ? (income - 208850) * 0.33 : (372950 - 208850) * 0.33;
+			}
+			if(income > 372950)
+			{
+				tax += (income - 372950) * 0.35;
+			}
+			break;
+			
+		case 2: //Compute tax for married separately
+			tax += (income <= 8350) ? income * 0.10 : 8350 * 0.10;
+			if(income > 8350)
+			{
+				tax += (income <= 33950) ? (income - 8350) * 0.15 : (33950 - 8350) * 0.15;
+			}
+			if(income > 33950)
+			{
+				tax += (income <= 68525) ? (income - 33950) * 0.25 : (68525 - 33950) * 0.25;
+			}
+			if(income > 68525)
+			{
+				tax += (income <= 104425) ? (income - 68525) * 0.28 : (104425 - 68525) * 0.28;
+			}
+			if(income > 104425)
+			{
+				tax += (income <= 186475) ? (income - 104425) * 0.33 : (186475 - 104425) * 0.33;
+			}
+			if(income > 186475)
+			{
+				tax += (income - 186475) * 0.35;
+			}
+			break;
+			
+		case 3: // Compute tax for head of household
+			tax += (income <= 11950) ? income * 0.10 : 11950 * 0.10;
+			if(income > 11950)
+			{
+				tax += (income <= 45500) ? (income - 11950) * 0.15 : (45500 - 11950) * 0.15;
+			}
+			if(income > 45500)
+			{
+				tax += (income <= 117450) ? (income - 45500) * 0.25 : (117450 - 45500) * 0.25;
+			}
+			if(income > 117450)
+			{
+				tax += (income <= 190200) ? (income - 117450) * 0.28 : (190200 - 117450) * 0.28;
+			}
+			if(income > 190200)
+			{
+				tax += (income <= 372950) ? (income - 190200) * 0.33 : (372950 - 190200) * 0.33;
+			}
+			if(income > 372950)
+			{
+				tax += (income - 372950) * 0.35;
+			}
+			break;
+			
+			default: System.out.println("Error: invalid status");
+			System.exit(1);
+		
+		}
+		
+		// Display the result
+		System.out.println("Tax is " + (int)(tax * 100) / 100.0);
+
+	}
+
+}
+
+Testing: (Describe how you test this program)
+
+Line No	status	income	tax	output
+11	0			
+15		100000		
+18			0	
+124				Tax is 21720.0
+
+Line No	status	income	tax	output
+11	1			
+15		300339		
+18			0	
+124				Tax is 76932.87
+
+Line No	status	income	tax	output
+11	2			
+15		123500		
+18			0	
+124				Tax is 29665.5
+
+Line No	status	income	tax	output
+11	3			
+15		4545402		
+18			0	
+124				Tax is 1565250.7
