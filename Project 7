@@ -1,0 +1,66 @@
+Project: Locker Puzzle
+
+Problem Description:
+A school has 100 lockers and 100 students. All lockers are closed on the first day of school. As the students enter, the first student, denoted S1, opens every locker. Then the second student, S2, begins with the second locker, denoted L2, and closes every other locker. Student S3 begins with the third locker and changes every third locker (closes it if it was open and opens it if it was closed). Student S4 begins with locker L4 and changes every fourth locker. Student S5 starts with L5 and changes every fifth locker, and so on, until student S100 changes L100.
+
+After all the students have passed through the building and changed the lockers, which lockers are open? Write a program to find your answer. The program should display the answer like this: 
+
+Locker x is open
+Locker y is open
+…
+Locker z is open
+
+
+(Hint: Use an array of 100 Boolean elements, each of which indicates whether a locker is open (true) or closed (false). Initially, all lockers are closed.)
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+The goal of this program is to allocate each student with a single locker. First student is assigned as S1 who will opens all the lockers. Now, the second student is assigned second locker, denoted as L2, and he will close all the lockers. Third student begins with third locker and changes every third locker i.e. closed it if it was open and vice versa. In this manner, the same procedure repeats until student S100 changes locker number L100.
+
+
+Design:
+(Describe the major steps for solving the problem.)
+
+1.	In the main method created boolean array of 101 elements instead of 100 element arrays. The reason for this is it will include 100th element as well. When we create an array of 100 element then it will include elements from 0 to 99, excluding the 100th element.
+2.	Create a for loop for opening all the lockers which are multiple of 1 before moving on to 2
+
+3.	Create a for loop for opening every locker for every multiple of i
+4.	Display the list of open lockers
+
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+
+Name your program Exercise07_23
+
+
+public class Exercise07_23 {
+
+	public static void main(String[] args) {
+		// Create an array for lockers
+				boolean[] lockerIsOpen = new boolean[101];
+				
+				// Open all multiple of 1 before moving on to 2
+				for(int i = 0; i < lockerIsOpen.length; i++)
+				{
+					lockerIsOpen[i] = true;
+				}
+				
+				// Open every locker for every multiple of i
+				for(int i = 1; i <= 100; i++)
+				{
+					for(int j = i; j <= 100; j += i)
+					{
+						lockerIsOpen[j] = !lockerIsOpen[i];
+					}
+				}
+				
+				// Display the indices of the open lockers
+				for(int i = 1; i*i <= 100; i++)
+				{
+					System.out.println("Locker " + i*i + " is open");
+				}
+
+	}
+
+}
