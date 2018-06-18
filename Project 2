@@ -1,0 +1,99 @@
+Project Name: Calculating Future Investment Value
+
+
+Problem Description:
+
+Write a program that reads in investment amount, annual interest rate, and number of years, and displays the future investment value using the following formula:
+and displays the future investment value using the following formula:
+
+futureInvestmentValue = 
+  investmentAmount * (1 + monthlyInterestRate)numberOfYears*12
+
+For example, if you enter amount 1000, annual interest rate 3.25%, and number of years 1, the future investment value is 1032.98. 
+
+Hint: Use the Math.pow(a, b) method to compute a raised to the power of b. 
+
+Here is a sample run:
+
+Sample 1:
+Enter investment amount: 1000
+Enter annual interest rate: 4.25
+Enter number of years: 1
+Accumulated value is 1043.34
+
+Sample 2:
+Enter investment amount: 1000
+Enter annual interest rate: 4.25
+Enter number of years: 1
+Accumulated value is 1043.34
+
+Analysis:
+(Describe the problem including input and output in your own words.)
+
+Here, we have to compute the future investment amount.
+For this, I used three inputs:
+1)	Amount that is invested as investmentAmount.
+2)	Annual interest rate as monthlyInterestRate.
+3)	Number of years the amount invested as numberOfYears.
+After applying the mentioned formula, I stored my output in futureInvestmentValue variable.
+
+
+
+
+Design: 
+(Describe the major steps for solving the problem.)
+
+I performed following steps for executing the program:
+
+1)	Created the scanner object for reading user inputs from keyboard
+2)	Read in the investment amount 
+3)	Read in the annual interest rate: for finding the annual interest rate we have to divide the interest rate by 1200 (12 as there are 12 months in a year and multiplied it with 100 since it is a percentage)
+4)	Read in the number of years the amount invested
+5)	Compute the investment amount using the formula:
+        
+futureInvestmentValue = investmentAmount * Math.pow(1 + monthlyInterestRate, numberOfYears * 12)
+
+
+Coding: (Copy and Paste Source Code here. Format your code using Courier 10pts)
+
+import java.util.Scanner;
+public class FutureInvestment {
+
+	public static void main(String[] args) {
+		
+		// Create a Scanner
+		Scanner input = new Scanner(System.in);
+		
+		// Enter the investment amount
+		System.out.print("Enter the investment amount:");
+		double investmentAmount = input.nextDouble();
+		
+		// Obtain monthly interest rate 
+		System.out.print("Enter annual interest rate:");
+		double monthlyInterestRate = input.nextDouble();
+		monthlyInterestRate /= 1200;
+		
+		// Enter number of years
+		System.out.print("Enter number of years:");
+		int numberOfYears = input.nextInt();
+		
+		// Calculate the future investment value
+		double futureInvestmentValue = investmentAmount * Math.pow(1 + monthlyInterestRate, numberOfYears * 12);
+		
+		// Display result 
+		System.out.println("Accumulated value is $" + futureInvestmentValue);
+		
+
+	}
+
+}
+
+
+
+Testing: (Describe how you test this program)
+
+For testing the source code, I performed following steps:
+
+1)	I checked the syntax of all the variables and identifiers
+2)	All the statement ends with semicolons.  
+3)	I checked whether all the declared variable have follow the data type consistency i.e. cross-checked variable that are declared as integer, double is assigned with the same data type.
